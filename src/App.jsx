@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 import UserReviews from './pages/UserReviews';
 import NotFound from './pages/Redirect';
 
+export const BACKEND_URL = "https://musicreviewapp-436625947182.europe-central2.run.app"
 
 export default function App(){
 

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import vinyl from '../assets/vinyl.svg';
 import headphones from '../assets/headphones.svg'
 import '../styles/login.css';
+import { BACKEND_URL } from '../App';
 
 export default function Login(){
     const [registered, setRegistered] = React.useState(true);
@@ -37,7 +38,7 @@ export default function Login(){
             return;
         }
 
-        fetch("http://musicreviewapp.eu-north-1.elasticbeanstalk.com/api/auth/register", {
+        fetch(`${BACKEND_URL}/api/auth/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -65,7 +66,7 @@ export default function Login(){
     function submitLogin(event){
         event.preventDefault();
 
-        fetch("http://musicreviewapp.eu-north-1.elasticbeanstalk.com/api/auth/login", {
+        fetch(`${BACKEND_URL}/api/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

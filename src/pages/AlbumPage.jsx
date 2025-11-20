@@ -6,6 +6,7 @@ import Review from "./Review";
 import icon from "../assets/home-icon.svg";
 import menu from "../assets/menu.svg";
 import '../styles/albumpage.css';
+import { BACKEND_URL } from "../App";
 
 export default function AlbumPage(){
     const [createView, setCreateView] = React.useState(false);
@@ -38,7 +39,7 @@ export default function AlbumPage(){
 
 
     React.useEffect(() => {
-        fetch(`http://musicreviewapp.eu-north-1.elasticbeanstalk.com/api/albums/${id}`)
+        fetch(`${BACKEND_URL}/api/albums/${id}`)
         .then(response => response.json())
         .then(json => setAlbum(json));
     }, [])
@@ -57,7 +58,7 @@ export default function AlbumPage(){
     }, [])
 
     React.useEffect(() => {
-        fetch(`http://musicreviewapp.eu-north-1.elasticbeanstalk.com/api/albums/${id}/reviews?pageNo=${pageNo}`)
+        fetch(`${BACKEND_URL}/api/albums/${id}/reviews?pageNo=${pageNo}`)
         .then(response => response.json())
         .then(json => {
             setReviews(json.content.sort((a, b) => 
@@ -124,7 +125,7 @@ export default function AlbumPage(){
 
         if (checkTokenExp()) return;
 
-        const url = update ? `http://musicreviewapp.eu-north-1.elasticbeanstalk.com/api/reviews/${reviewId}/update` : "http://musicreviewapp.eu-north-1.elasticbeanstalk.com/api/reviews/create";
+        const url = update ? `${BACKEND_URL}/api/reviews/${reviewId}/update` : `${BACKEND_URL}/api/reviews/create`;
 
         const method = update ? "PUT" : "POST";
 

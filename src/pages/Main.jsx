@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import vinyl from '../assets/vinyl.svg';
 import headphones from '../assets/headphones.svg'
 import '../styles/main.css'
+import { BACKEND_URL } from "../App";
 
 export default function Main(props){
     const [searchContent, setSearchContent] = React.useState("");
@@ -69,7 +70,7 @@ export default function Main(props){
             return;
         }
 
-        fetch(`http://musicreviewapp.eu-north-1.elasticbeanstalk.com/api/albums/search?content=${searchContent.replace(/\s/g,'')}&pageNo=${pageNo}`)
+        fetch(`${BACKEND_URL}/api/albums/search?content=${searchContent.replace(/\s/g,'')}&pageNo=${pageNo}`)
         .then(response => response.json())
         .then(json => setAlbums(json.content));
     }, [searchContent, pageNo])

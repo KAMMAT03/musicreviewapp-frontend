@@ -4,6 +4,7 @@ import Review from "./Review";
 import CreateReview from "./CreateReview";
 import '../styles/userreviews.css'
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { BACKEND_URL } from "../App";
 
 export default function UserReviews(props){
     const [reviews, setReviews] = React.useState([]);
@@ -32,7 +33,7 @@ export default function UserReviews(props){
 
 
     React.useEffect(() => {
-        fetch(`http://musicreviewapp.eu-north-1.elasticbeanstalk.com/api/users/${username}/reviews?pageNo=${pageNo}`)
+        fetch(`${BACKEND_URL}/api/users/${username}/reviews?pageNo=${pageNo}`)
         .then(response => response.json())
         .then(json => {
             setReviews(json.content.sort((a, b) => 
@@ -104,7 +105,7 @@ export default function UserReviews(props){
             return;
         }
 
-        fetch(`http://musicreviewapp.eu-north-1.elasticbeanstalk.com/api/reviews/${reviewId}/update`, {
+        fetch(`${BACKEND_URL}/api/reviews/${reviewId}/update`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

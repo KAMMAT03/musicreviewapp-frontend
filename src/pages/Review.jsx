@@ -2,6 +2,7 @@ import React from "react";
 import Album from "./Album";
 import trash from "../assets/trash-icon.svg";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../App";
 
 export default function Review({reviewProps, detailed, goToAlbum, username, token, parseJwt, updateView, viewSidebar}){
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function Review({reviewProps, detailed, goToAlbum, username, toke
     function deleteReview(){
         if (checkTokenExp()) return;
 
-        fetch(`http://musicreviewapp.eu-north-1.elasticbeanstalk.com/api/reviews/${reviewProps.id}/delete`, {
+        fetch(`${BACKEND_URL}/api/reviews/${reviewProps.id}/delete`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
